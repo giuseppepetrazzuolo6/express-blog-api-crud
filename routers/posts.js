@@ -1,58 +1,24 @@
 const express = require('express');
 const router = express.Router();
-const postsList = require('../data/postsList');
+const postsController = require('../controllers/postsController')
+
 
 // index
-router.get('/', (req, res) => {
-    res.json(postsList);
-});
+router.get('/', postsController.index);
 
 // show
-router.get('/:id', (req, res) => {
-    const id = Number(req.params.id)
-
-    const foundPost = postsList.find(post => post.id === id)
-
-    if (!foundPost) {
-        return res.status(404).json({
-            error: true,
-            message: 'Not found'
-        })
-    }
-    res.json(foundPost);
-});
+router.get('/:id', postsController.show);
 
 // store
-router.post('/', (req, res) => {
-    res.send('Creazione nuovo post');
-});
+router.post('/', postsController.store);
 
 // update
-router.put('/:id', (req, res) => {
-    res.send('Modifica del post');
-});
+router.put('/:id', postsController.update);
 
 // modify
-router.patch('/:id', (req, res) => {
-    res.send('Piccola modifica del post');
-});
+router.patch('/:id', postsController.modify);
 
 // destroy
-router.delete('/:id', (req, res) => {
-    const id = Number(req.params.id)
-
-    const foundPost = postsList.find(post => post.id === id)
-
-    if (!foundPost) {
-        return res.status(404).json({
-            error: true,
-            message: 'Not found'
-        })
-    }
-
-    postsList.splice(postsList.indexOf(foundPost), 1)
-
-    res.sendStatus(204)
-});
+router.delete('/:id', postsController.destroy);
 
 module.exports = router
