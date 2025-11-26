@@ -9,7 +9,17 @@ router.get('/', (req, res) => {
 
 // show
 router.get('/:id', (req, res) => {
-    res.send('Dettagli del post');
+    const id = Number(req.params.id)
+
+    const foundPost = postsList.find(post => post.id === id)
+
+    if (!foundPost) {
+        return res.status(404).json({
+            error: true,
+            message: 'Not found'
+        })
+    }
+    res.json(foundPost);
 });
 
 // store
