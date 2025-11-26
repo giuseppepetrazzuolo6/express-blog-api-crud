@@ -39,7 +39,20 @@ router.patch('/:id', (req, res) => {
 
 // destroy
 router.delete('/:id', (req, res) => {
-    res.send('Rimozione post');
+    const id = Number(req.params.id)
+
+    const foundPost = postsList.find(post => post.id === id)
+
+    if (!foundPost) {
+        return res.status(404).json({
+            error: true,
+            message: 'Not found'
+        })
+    }
+
+    postsList.splice(postsList.indexOf(foundPost), 1)
+
+    res.sendStatus(204)
 });
 
 module.exports = router
