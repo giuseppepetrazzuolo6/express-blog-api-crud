@@ -29,11 +29,14 @@ function show(req, res) {
 }
 
 function store(req, res) {
-    const newPost = req.body;
-    console.log(newPost);
+    const newPost = {
+        id: Date.now(),
+        ...req.body
+    }
 
+    postsList.push(newPost)
 
-    res.send('aggiungi nuovo post')
+    res.status(201).json(newPost)
 }
 
 function update(req, res) {
