@@ -29,7 +29,11 @@ function show(req, res) {
 }
 
 function store(req, res) {
-    res.send('Creazione nuovo post');
+    const newPost = req.body;
+    console.log(newPost);
+
+
+    res.send('aggiungi nuovo post')
 }
 
 function update(req, res) {
