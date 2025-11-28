@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const PORT = 3000;
 const postsRouter = require('./routers/posts');
+const serverMiddleware = require('./middleware/serverMiddleware')
 
 app.use(express.static('public'));
 
@@ -16,3 +17,5 @@ app.use('/', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
+
+app.use(serverMiddleware)
