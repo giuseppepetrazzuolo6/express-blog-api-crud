@@ -3,6 +3,7 @@ const app = express();
 const PORT = 3000;
 const postsRouter = require('./routers/posts');
 const serverMiddleware = require('./middleware/serverMiddleware')
+const notFoundMiddleware = require('./middleware/notFoundMiddleware')
 
 app.use(express.static('public'));
 
@@ -19,3 +20,4 @@ app.listen(PORT, () => {
 });
 
 app.use(serverMiddleware)
+app.use(notFoundMiddleware)
